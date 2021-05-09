@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Aluno</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="{{url_for('static', filename='css/base.css')}}" rel="stylesheet">
+
+</head>
+<body>
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <a href="/"><span class="mdc-top-app-bar__title">Cadastro de Alunos</span></a>
+         </section>
+        </div>
+    </header>
+    <div class="container_single mdc-top-app-bar--fixed-adjust">
+        <h1>Adicionar Aluno</h1>
+        <form  action="/add" method="POST">
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="nome-label">Nome</span>
+                <input class="mdc-text-field__input" type="text" aria-labelledby="nome-label" id="usr" name="nome" required>
+                <span class="mdc-line-ripple"></span>
+            </label>
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="email-label">Email</span>
+                <input class="mdc-text-field__input" type="email" aria-labelledby="email-label" id="mail" name="email" required>
+                <span class="mdc-line-ripple"></span>
+            </label>
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="cep-label">CEP</span>
+                <input class="mdc-text-field__input" type="text" aria-labelledby="cep-label" id="cep" name="cep" required>
+                <span class="mdc-line-ripple"></span>
+            </label>
+
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="address-label">Endereço</span>
+                <input class="mdc-text-field__input" type="text" aria-labelledby="address-label" id="endereco" name="logradouro" required>
+                <span class="mdc-line-ripple"></span>
+            </label>
+
+            <div class="horizontal-flex">
+
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="num-label">Número</span>
+                    <input class="mdc-text-field__input" type="number" aria-labelledby="num-label" id="num" name="numero" required>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+    
+    
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="comple-label">Complemento</span>
+                    <input class="mdc-text-field__input" type="text" aria-labelledby="comple-label" id="complemento" name="complemento">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+            </div>
+
+            
+
+        <button class="mdc-button mdc-button--raised submit-button" type="submit">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Cadastrar</span>
+        </button>
+        </form>
+    </div>
+    <script>
+        const textFields = [].slice.call(document.querySelectorAll('.mdc-text-field'))
+        let materialAddressField;
+        let materialNumberField;
+        let materialComplementField;
+        textFields.forEach((textFieldEl, index) => {
+            console.log(index)
+            switch (index) {
+                case 3:
+                    materialAddressField = mdc.textField.MDCTextField.attachTo(textFieldEl);
+                case 4:
+                    materialNumberField = mdc.textField.MDCTextField.attachTo(textFieldEl);
+                case 5:
+                    materialComplementField = mdc.textField.MDCTextField.attachTo(textFieldEl);
+                default:
+                    mdc.textField.MDCTextField.attachTo(textFieldEl);
+            }
+        })
+        const cepField = document.getElementById('cep');
+        let addressInfo;
+
+        let cepString = ""
+        cepField.addEventListener('change', (e) => {
+            let baseApiURL = "https://viacep.com.br/ws/"
+            const value = e.target.value;
+            if (value.length >= 8 && value.length < 10) {
+                cepString = value;
+                if (value.includes('-')) {
+                    cepString = value.split('-').join('');
+                }
+                console.log(cepString);
+                baseApiURL += (cepString + "/json/")
+                console.log("BASE API URL: ", baseApiURL)
+            }
+            
+            fetch(baseApiURL)
+                .then(res => res.json())
+                .then(json => {
+                    addressInfo = json
+                    materialAddressField.value = addressInfo.logradouro;
+                    materialComplementField.value = addressInfo.complemento;
+                    return
+                })
+                .then(() => {
+                    materialNumberField.focus();
+                })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+html, body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+.container_single {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container_single > form {
+    display: flex;
+    flex-direction: column;
+}
+.container_single > form > label {
+    margin-bottom: 10px;
+}
+.empty-records {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.button-holder {
+    max-width: 100%;
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.mdc-data-table {
+    width: 100%;
+}
+.horizontal-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.submit-button {
+    margin-top: 20px;
+    max-width: 375px;
+}
+a {
+    text-decoration: none;
+}
+a:visited {
+    color: #fff;
+}
+@media (min-width: 375px) {
+    .horizontal-flex {
+        flex-direction: row;
+    }
+}
+@media (min-width: 400px) {
+    .submit-button {
+        max-width: 120px;
+    }
+}
+.table-wrapper {
+    margin-top: 60px;
+}
+.button-holder + .table-wrapper {
+    margin-top: 0px;
+}
