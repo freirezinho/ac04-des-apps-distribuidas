@@ -2,8 +2,9 @@ const textFields = [].slice.call(document.querySelectorAll('.mdc-text-field'))
 let materialAddressField;
 let materialNumberField;
 let materialComplementField;
+const snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
+
 textFields.forEach((textFieldEl, index) => {
-    console.log(index)
     switch (index) {
         case 3:
             materialAddressField = mdc.textField.MDCTextField.attachTo(textFieldEl);
@@ -31,16 +32,23 @@ cepField.addEventListener('change', (e) => {
         baseApiURL += (cepString + "/json/")
         console.log("BASE API URL: ", baseApiURL)
     }
-    
     fetch(baseApiURL)
         .then(res => res.json())
         .then(json => {
             addressInfo = json
-            materialAddressField.value = addressInfo.logradouro;
-            materialComplementField.value = addressInfo.complemento;
+            if (json.logradouro !== undefined && json.logradouro !== 'undefined') {
+                materialAddressField.value = addressInfo.logradouro;
+                materialComplementField.value = addressInfo.complemento;
+            } else {
+                snackbar.open();
+            }
             return
         })
         .then(() => {
             materialNumberField.focus();
+        })
+        .catch(e => {
+            console.error(e);
+            snackbar.open()
         })
 })

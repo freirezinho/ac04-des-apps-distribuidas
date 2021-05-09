@@ -76,6 +76,19 @@
         </button>
         </form>
     </div>
+    <div class="mdc-snackbar">
+        <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+          <div class="mdc-snackbar__label" aria-atomic="false">
+            Houve um problema ao recuperar seu endereço pelo CEP. Por favor, verifique-o ou digite seu endereço manualmente.
+          </div>
+          <div class="mdc-snackbar__actions" aria-atomic="true">
+            <button type="button" class="mdc-button mdc-snackbar__action">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">OK</span>
+            </button>
+          </div>
+        </div>
+    </div>
     <script src="{{url_for('static', filename='js/form_controller.js')}}"></script>
 </body>
 </html>
