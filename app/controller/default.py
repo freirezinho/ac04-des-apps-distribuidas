@@ -5,7 +5,6 @@ from app.model.tables import Student
 
 @app.route("/")
 def index():
-    #selecionar todos - select * from
     students = Student.query.all()
     return render_template(
         "index.html",

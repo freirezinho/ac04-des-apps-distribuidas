@@ -1,8 +1,11 @@
-const textFields = [].slice.call(document.querySelectorAll('.mdc-text-field'))
 let materialAddressField;
 let materialNumberField;
 let materialComplementField;
+let addressInfo;
+let cepString = ""
 const snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
+const textFields = [].slice.call(document.querySelectorAll('.mdc-text-field'))
+const cepField = document.getElementById('cep');
 
 textFields.forEach((textFieldEl, index) => {
     switch (index) {
@@ -16,10 +19,6 @@ textFields.forEach((textFieldEl, index) => {
             mdc.textField.MDCTextField.attachTo(textFieldEl);
     }
 })
-const cepField = document.getElementById('cep');
-let addressInfo;
-
-let cepString = ""
 cepField.addEventListener('change', (e) => {
     let baseApiURL = "https://viacep.com.br/ws/"
     const value = e.target.value;

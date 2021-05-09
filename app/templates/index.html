@@ -17,8 +17,9 @@
             </div>
           </header>
         <div class="container mdc-top-app-bar--fixed-adjust">
+            
             {%if students|length > 0 %}
-
+            
             <div class="button-holder">
                 <a href="/add">
                     <button class="mdc-button link-button">
@@ -26,13 +27,17 @@
                         <span class="mdc-button__label">Adicionar Aluno</span>
                     </button>
                 </a>
+            
             </div>
+            
             {% endif %}
+            
             <main class="table-wrapper">
                 <div class="mdc-data-table">
                     <div class="mdc-data-table__table-container">
 
                     {%if students|length > 0 %}
+                    
                     <table class="mdc-data-table__table" aria-label="Alunos cadastrados">
                         <thead>
                         <tr class="mdc-data-table__header-row">
@@ -47,7 +52,9 @@
                         </tr>
                         </thead>
                         <tbody class="mdc-data-table__content">
+                            
                             {% for s in students %}
+                            
                             <tr data-row-id="{{s.ra}}" class="mdc-data-table__row">
                                 <th class="mdc-data-table__cell" scope="row" id="u0">{{s.nomeAluno}}</th>
                                 <td class="mdc-data-table__cell">{{s.emailAluno}}</td>
@@ -72,11 +79,14 @@
                                     </a>
                             </td>
                             </tr>
+                            
                             {% endfor %}
+                        
                         </tbody>
                     </table>
 
                     {% else %}
+                    
                     <article class="empty-records">
                         <h2>Ainda não há alunos cadastrados</h2>
                         <p>Comece a cadastrar alunos agora</p>
@@ -86,15 +96,18 @@
                                 <span class="mdc-button__label">Cadastrar Aluno</span>
                             </button>
                         </a>
+                    
                     </article>
+                
                     {% endif %}
-                    </div>
+                    
+                </div>
                 </div>
             </main>
-            </div>
-            <script>
-                mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
-                mdc.dataTable.MDCDataTable.attachTo(document.querySelector('.mdc-data-table'))
-            </script>
+        </div>
+        <script>
+            mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
+            mdc.dataTable.MDCDataTable.attachTo(document.querySelector('.mdc-data-table'))
+        </script>
     </body>
 </html>
