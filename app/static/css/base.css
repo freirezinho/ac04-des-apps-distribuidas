@@ -10,6 +10,11 @@ html, body {
     display: flex;
     flex-direction: column;
 }
+.container, .container_single {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .container_single {
     max-width: 650px;
     margin-left: auto;
@@ -52,6 +57,9 @@ a {
 a:visited {
     color: #fff;
 }
+.mdc-top-app-bar__section > a {
+    color: #fff;
+}
 @media (min-width: 375px) {
     .horizontal-flex {
         flex-direction: row;
@@ -60,6 +68,10 @@ a:visited {
 @media (min-width: 400px) {
     .submit-button {
         max-width: 120px;
+    }
+    .container_single, .container {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 .table-wrapper {
